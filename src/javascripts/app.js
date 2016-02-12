@@ -1,21 +1,22 @@
-(function () {
+(function (dribbbler, undefined) {
     'use strict';
 
-    //  Variables
+    //  Private variables
     //--------------------------------------------------------
 
     var api = 'https://api.dribbble.com/v1',
         token = '7fd3070a9e61d6162ef3e773ff73b54c9750cbed7fcfd5a9dd6b4267d6a3c00f';
 
-    var app = {
-        helpers: helpersService,
-        ajax: ajaxService
-    };
+    //  Public methods
+    //--------------------------------------------------------
+
+    dribbbler.utilities = utilities;
+    dribbbler.ajaxService = ajaxService;
 
     //  Functions
     //--------------------------------------------------------
 
-    function helpersService() {
+    function utilities() {
         return {
             preloader: preloader
         };
@@ -24,10 +25,12 @@
             var preloader = document.getElementById('preloader');
 
             var states = {
-                activate: function() {
+                activate: function () {
+                    console.log('on');
                     preloader.classList.add('preloader');
                 },
-                deactivate: function() {
+                deactivate: function () {
+                    console.log('off');
                     preloader.classList.remove('preloader');
                 }
             };
@@ -36,11 +39,9 @@
     }
 
     function ajaxService() {
-        this.helpers().preloader('activate');
-
         var ajax = {};
 
-        ajax.x = function () {
+        ajax.xhttp = function () {
             if (typeof XMLHttpRequest !== 'undefined') {
                 return new XMLHttpRequest();
             }
@@ -69,17 +70,17 @@
             if (async === undefined) {
                 async = true;
             }
-            var x = ajax.x();
-            x.open(method, url, async);
-            x.onreadystatechange = function () {
-                if (x.readyState === 4) {
-                    callback(x.responseText)
+            var xhttp = ajax.xhttp();
+            xhttp.open(method, url, async);
+            xhttp.onreadystatechange = function () {
+                if (xhttp.readyState === 4 && xhttp.status === 200) {
+                    callback(xhttp.responseText)
                 }
             };
             if (method === 'POST') {
-                x.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             }
-            x.send(params)
+            xhttp.send(params)
         };
 
         ajax.get = function (url, params, callback, async) {
@@ -103,6 +104,4 @@
         return ajax;
     }
 
-    window.app = app;
-
-}());
+})(window.dribbbler = window.dribbbler || {});

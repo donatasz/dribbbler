@@ -1,10 +1,12 @@
-(function (app) {
+(function (dribbbler, undefined) {
     'use strict';
 
     // Variables
     // ========================================================
     var dribbbleShots = document.querySelector('.dribbble-shots'),
-        pageIndex = 1;
+        pageIndex = 1,
+        ajaxService = dribbbler.ajaxService(),
+        utilities = dribbbler.utilities();
 
     // Listen for DOMContentLoaded and initialize
     // ========================================================
@@ -20,7 +22,13 @@
         document.addEventListener('scroll', function () {
             checkForNewDiv();
         });
-        app.ajax().get('/shots', {page: pageIndex}, responseHandler);
+        getData(pageIndex);
+    }
+
+    function getData(index) {
+        utilities.preloader('activate');
+        console.log('get data');
+        ajaxService.get('/shots', {page: index}, responseHandler);
     }
 
     function responseHandler(response) {
@@ -89,7 +97,7 @@
 
             dribbbleShots.appendChild(shotDiv);
         }
-        app.helpers().preloader('deactivate');
+        utilities.preloader('deactivate');
     }
 
     function checkForNewDiv() {
@@ -98,8 +106,9 @@
             pageOffset = window.pageYOffset + window.innerHeight;
 
         if (pageOffset >= lastDivOffset) {
+            console.log('inside checkForNewDiv');
             pageIndex += 1;
-            app.ajax().get('/shots', {page: pageIndex}, responseHandler);
+            getData(pageIndex);
         }
     }
 
@@ -142,4 +151,4 @@
         clickedShot.classList.remove('liked');
     }
 
-})(window.app);
+})(window.dribbbler);
