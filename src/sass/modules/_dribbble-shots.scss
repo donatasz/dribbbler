@@ -1,0 +1,130 @@
+.shot {
+    position: relative;
+    margin-bottom: 15px;
+    .image-wrapper {
+        position: relative;
+        border-radius: 7px;
+        .image-shadow {
+            position: relative;
+            border-radius: 7px;
+            img {
+                width: 100%;
+                height: auto;
+                display: block;
+                border-radius: 7px;
+            }
+            &:before {
+                content: "";
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                opacity: 0;
+                transition: opacity .3s;
+                border-radius: 7px;
+                box-shadow: inset 0 0 240px 90px rgba(117,113,117,0.75);
+            }
+        }
+    }
+
+    .info-wrapper {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 0;
+        text-align: center;
+        .info-box {
+            display: table;
+            height: 100%;
+            width: 100%;
+            .info-box-content {
+                display: table-cell;
+                vertical-align: middle;
+            }
+        }
+    }
+
+    &:hover {
+        .image-wrapper {
+            .image-shadow {
+                img {
+                    //-webkit-filter: blur(3px);
+                    //filter: blur(3px);
+                    //filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='3');
+                }
+                &:before {
+                    opacity: 1;
+                }
+            }
+        }
+        .info-wrapper {
+            opacity: 1;
+        }
+    }
+
+    h2, h3 {
+        color: $white;
+        text-transform: capitalize;
+        text-shadow: 2px 2px 3px rgba(0,0,0,.6);
+        padding: 0.75rem 0;
+        margin: 0;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    h3 {
+        font-size: 1rem;
+        font-style: italic;
+        span {
+            position: relative;
+            padding-top: 0.75rem;
+            &:before {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 1px;
+                border-top: 2px solid $white;
+                content: ""
+            }
+        }
+    }
+}
+
+.liked {
+    position: relative;
+    &:before {
+        position: absolute;
+        top: 15px;
+        right: 25px;
+        z-index: 2;
+        background-image: url('../images/heart.png');
+        background-size: 32px 32px;
+        width: 32px;
+        height: 32px;
+        content: '';
+        color: $white;
+        @media screen and (min-width: 480px) {
+            background-size: 64px 64px;
+            width: 64px;
+            height: 64px;
+        }
+    }
+}
+
+.btn-favorite {
+    color: $white;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 7px 30px;
+    border-radius: 30px;
+    border: 2px solid $white;
+    background: transparent;
+}
+
+
