@@ -119,13 +119,13 @@
       xhttp.open(method, url, async);
       xhttp.onreadystatechange = function () {
         if (xhttp.readyState === 4 && xhttp.status === 200) {
-          callback(xhttp.responseText)
+          callback(xhttp.responseText);
         }
       };
       if (method === 'POST') {
         xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
       }
-      xhttp.send(params)
+      xhttp.send(params);
     };
 
     ajax.get = function (url, params, callback, async) {
@@ -134,7 +134,7 @@
       for (var key in params) {
         query.push(encodeURIComponent(key) + '=' + encodeURIComponent(params[key]));
       }
-      ajax.send(api + url + (query.length ? '?' + query.join('&') : ''), callback, 'GET', null, async)
+      ajax.send(api + url + (query.length ? '?' + query.join('&') : ''), callback, 'GET', null, async);
     };
 
     ajax.post = function (url, params, callback, async) {
@@ -143,7 +143,7 @@
       for (var key in params) {
         query.push(encodeURIComponent(key) + '=' + encodeURIComponent(params[key]));
       }
-      ajax.send(api + url, callback, 'POST', query.join('&'), async)
+      ajax.send(api + url, callback, 'POST', query.join('&'), async);
     };
 
     return ajax;
