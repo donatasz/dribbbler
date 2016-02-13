@@ -7,7 +7,7 @@
   var api = 'https://api.dribbble.com/v1',
     token = '7fd3070a9e61d6162ef3e773ff73b54c9750cbed7fcfd5a9dd6b4267d6a3c00f';
 
-  //  Public methods
+  //  Application methods and properties
   //--------------------------------------------------------
 
   dribbbler.utilities = utilities;
@@ -176,14 +176,9 @@
     // A hash to store our routes:
     var el = null,
         routes = {
-          '/': {templateId: 'home', controller: function () {}},
-          '/page1': {templateId: 'template1', controller: function () {
-            this.greeting = 'Hello world!';
-            this.moreText = 'Bacon ipsum...';
-          }},
-          '/page2': {templateId: 'template2', controller: function () {
-            this.heading = 'I\'m page two!';
-          }}
+          '/': {templateId: 'home', controller: HomeController},
+          '/page1': {templateId: 'template1', controller: Page1Controller},
+          '/page2': {templateId: 'template2', controller: Page2Controller}
         };
 
     // Routes
@@ -217,7 +212,22 @@
         el.innerHTML = templates().create(route.templateId, new route.controller());
       }
     }
+  }
 
+  //  Application controllers
+  //--------------------------------------------------------
+
+  function HomeController() {
+    this.greeting = 'Hello Adele!';
+  }
+
+  function Page1Controller() {
+    this.greeting = 'Hello world!';
+    this.moreText = 'Bacon ipsum...';
+  }
+
+  function Page2Controller() {
+    this.heading = 'I\'m page two!';
   }
 
 })(window.dribbbler = window.dribbbler || {});
