@@ -1,0 +1,32 @@
+{
+  "name": "dribbbler",
+  "description": "Personal project for learning purposes.",
+  "main": "main.js",
+  "authors": [
+    "Donatas Žukauskas"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "HTML5",
+    "CSS",
+    "SASS",
+    "JavaScript",
+    "Gulp",
+    "Browsersync"
+  ],
+  "homepage": "https://github.com/donatasz/dribbbler",
+  "moduleType": [
+    "globals"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "q": "1.0.1"
+  }
+}
