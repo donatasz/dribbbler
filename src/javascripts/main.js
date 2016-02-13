@@ -32,7 +32,7 @@
     }
 
     function responseHandler(response) {
-        var data = JSON.parse(response);
+        var data = utilities.fromJson(response);
         for (var i = 0, len = data.length; i < len; i++) {
             var images = data[i].images,
                 shotDiv = document.createElement('div'),
@@ -113,7 +113,7 @@
     }
 
     function markFavorite(id) {
-        var favoriteShots = JSON.parse(localStorage.getItem('favoriteShots')),
+        var favoriteShots = utilities.fromJson(localStorage.getItem('favoriteShots')),
             shotIndex;
         if(favoriteShots) {
             if(!isLiked(id)){
@@ -130,11 +130,11 @@
             addLike(id);
         }
 
-        localStorage.setItem('favoriteShots', JSON.stringify(favoriteShots));
+        localStorage.setItem('favoriteShots', utilities.toJson(favoriteShots));
     }
 
     function isLiked(id) {
-        var favoriteShots = JSON.parse(localStorage.getItem('favoriteShots'));
+        var favoriteShots = utilities.fromJson(localStorage.getItem('favoriteShots'));
         if(favoriteShots) {
             return favoriteShots.indexOf(id) > -1;
         }
