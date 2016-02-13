@@ -197,9 +197,10 @@
   //--------------------------------------------------------
 
   function HomeController() {
+    var vm = this;
     //ajaxService().get('/shots', {page: 1}, responseHandler);
-    this.category = 'Random Shots';
-    this.shots = [{id:1, title: 'Lorem ipsum', user: {name: 'Dolorem'}, images: {normal: 'https://d13yacurqjgara.cloudfront.net/users/39185/screenshots/2523093/flower.jpg'}}];
+    vm.category = 'Random Shots';
+    vm.shots = [{id:1, title: 'Lorem ipsum', user: {name: 'Dolorem'}, images: {normal: 'https://d13yacurqjgara.cloudfront.net/users/39185/screenshots/2523093/flower.jpg'}}];
 
   }
 
