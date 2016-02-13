@@ -5,15 +5,30 @@
   //--------------------------------------------------------
 
   var api = 'https://api.dribbble.com/v1',
-    token = '7fd3070a9e61d6162ef3e773ff73b54c9750cbed7fcfd5a9dd6b4267d6a3c00f';
+    token = '7fd3070a9e61d6162ef3e773ff73b54c9750cbed7fcfd5a9dd6b4267d6a3c00f',
+    view = null,
+    // A hash to store templates
+    templateCache = {},
+    // A hash to store routes
+    routes = {
+      '/': {templateId: 'home', controller: HomeController},
+      '/page1': {templateId: 'template1', controller: Page1Controller},
+      '/page2': {templateId: 'template2', controller: Page2Controller}
+    };
 
-  //  Application methods and properties
+  //  Event listeners for Router
+  //--------------------------------------------------------
+
+  // Listen on hash change:
+  window.addEventListener('hashchange', router);
+  // Listen on page load:
+  window.addEventListener('load', router);
+
+  //  Application public methods
   //--------------------------------------------------------
 
   dribbbler.utilities = utilities;
   dribbbler.ajaxService = ajaxService;
-  dribbbler.templates = templates;
-  dribbbler.routingService = routingService;
 
   //  Functions
   //--------------------------------------------------------
@@ -134,83 +149,47 @@
     return ajax;
   }
 
-  function templates() {
-    var cache = {};
+  function createTemplate(str, data) {
+    // Figure out if we're getting a template, or if we need to
+    // load the template - and be sure to cache the result.
+    var fn = !/\W/.test(str) ?
+      templateCache[str] = templateCache[str] ||
+        createTemplate(document.getElementById(str).innerHTML) :
 
-    return {
-      create: create
-    };
+      // Generate a reusable function that will serve as a template
+      // generator (and which will be cached).
+      new Function("obj",
+        "var p=[],print=function(){p.push.apply(p,arguments);};" +
 
-    function create(str, data) {
-      // Figure out if we're getting a template, or if we need to
-      // load the template - and be sure to cache the result.
-      var fn = !/\W/.test(str) ?
-        cache[str] = cache[str] ||
-        create(document.getElementById(str).innerHTML) :
+          // Introduce the data as local variables using with(){}
+        "with(obj){p.push('" +
 
-        // Generate a reusable function that will serve as a template
-        // generator (and which will be cached).
-        new Function("obj",
-          "var p=[],print=function(){p.push.apply(p,arguments);};" +
+          // Convert the template into pure JavaScript
+        str
+          .replace(/[\r\t\n]/g, " ")
+          .split("{{").join("\t")
+          .replace(/((^|\}\})[^\t]*)'/g, "$1\r")
+          .replace(/\t=(.*?)\}\}/g, "',$1,'")
+          .split("\t").join("');")
+          .split("}}").join("p.push('")
+          .split("\r").join("\\'")
+        + "');}return p.join('');");
 
-            // Introduce the data as local variables using with(){}
-          "with(obj){p.push('" +
-
-            // Convert the template into pure JavaScript
-          str
-            .replace(/[\r\t\n]/g, " ")
-            .split("{{").join("\t")
-            .replace(/((^|\}\})[^\t]*)'/g, "$1\r")
-            .replace(/\t=(.*?)\}\}/g, "',$1,'")
-            .split("\t").join("');")
-            .split("}}").join("p.push('")
-            .split("\r").join("\\'")
-          + "');}return p.join('');");
-
-      // Provide some basic currying to the user
-      return data ? fn(data) : fn;
-    }
+    // Provide some basic currying to the user
+    return data ? fn(data) : fn;
   }
 
-  function routingService() {
-    // A hash to store our routes:
-    var el = null,
-        routes = {
-          '/': {templateId: 'home', controller: HomeController},
-          '/page1': {templateId: 'template1', controller: Page1Controller},
-          '/page2': {templateId: 'template2', controller: Page2Controller}
-        };
-
-    // Routes
-    //route('/', 'home', function () {});
-    //route('/page1', 'template1', function () {
-    //  this.greeting = 'Hello world!';
-    //  this.moreText = 'Bacon ipsum...';
-    //});
-    //route('/page2', 'template2', function () {
-    //  this.heading = 'I\'m page two!';
-    //});
-
-    return {
-      router: router
-    };
-
-    function route (path, templateId, controller) {
-      routes[path] = {templateId: templateId, controller: controller};
-    }
-
-    function router () {
-      // Lazy load view element:
-      el = el || document.getElementById('view');
-      // Current route url (getting rid of '#' in hash as well):
-      var url = location.hash.slice(1) || '/';
-      // Get route by url:
-      var route = routes[url];
-      // Do we have both a view and a route?
-      if (el && route.controller) {
-        // Render route template with John Resig's template engine:
-        el.innerHTML = templates().create(route.templateId, new route.controller());
-      }
+  function router() {
+    // Lazy load view element:
+    view = view || document.getElementById('view');
+    // Current route url (getting rid of '#' in hash as well):
+    var url = location.hash.slice(1) || '/';
+    // Get route by url:
+    var route = routes[url];
+    // Do we have both a view and a route?
+    if (view && route.controller) {
+      // Render route template with John Resig's template engine:
+      view.innerHTML = createTemplate(route.templateId, new route.controller());
     }
   }
 

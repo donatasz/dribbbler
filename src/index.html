@@ -10,13 +10,20 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic&subset=latin,latin-ext">
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="stylesheets/main.css">
+  <!--[if lt IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
-<ul>
-  <li><a href="#">All Shots</a></li>
-  <li><a href="#/page1">Animated</a></li>
-  <li><a href="#/page2">Debuts</a></li>
-</ul>
+<header class="container">
+  <nav class="row">
+    <ul class="col-lg-12">
+      <li><a href="#">All Shots</a></li>
+      <li><a href="#/page1">Animated</a></li>
+      <li><a href="#/page2">Debuts</a></li>
+    </ul>
+  </nav>
+</header>
 
 <div id="view"></div>
 
@@ -33,16 +40,51 @@
 
 <!-- Templates -->
 <script type="text/html" id="home">
-  <h1>Router FTW!</h1>
-  <p>{{= greeting }}</p>
+  <div class="page-wrapper">
+    <div class="container">
+      <section class="row">
+        <article class="col-lg-12">
+          <header>
+            <h1>Router FTW!</h1>
+            <h2>{{= greeting }}</h2>
+          </header>
+        </article>
+      </section>
+      <section class="row start-xs around-lg dribbble-shots"></section>
+    </div>
+  </div>
 </script>
+
 <script type="text/html" id="template1">
-  <h1>Page 1: {{= greeting }}</h1>
-  <p>{{= moreText }}</p>
+  <div class="page-wrapper">
+    <div class="container">
+      <section class="row">
+        <article class="col-lg-12">
+          <header>
+            <h1>Page 1: {{= greeting }}</h1>
+            <h2>{{= moreText }}</h2>
+          </header>
+        </article>
+      </section>
+      <section class="row start-xs around-lg dribbble-shots"></section>
+    </div>
+  </div>
 </script>
+
 <script type="text/html" id="template2">
-  <h1>Page 2: {{= heading }}</h1>
-  <p>Lorem ipsum...</p>
+  <div class="page-wrapper">
+    <div class="container">
+      <section class="row">
+        <article class="col-lg-12">
+          <header>
+            <h1>Page 2: {{= heading }}</h1>
+            <h2>Lorem ipsum...</h2>
+          </header>
+        </article>
+      </section>
+      <section class="row start-xs around-lg dribbble-shots"></section>
+    </div>
+  </div>
 </script>
 
 </body>

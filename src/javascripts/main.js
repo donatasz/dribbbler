@@ -6,8 +6,7 @@
   var dribbbleShots = document.querySelector('.dribbble-shots'),
     pageIndex = 1,
     ajaxService = dribbbler.ajaxService(),
-    utilities = dribbbler.utilities(),
-    router = dribbbler.routingService().router;
+    utilities = dribbbler.utilities();
 
   // Listen for DOMContentLoaded and initialize
   // ========================================================
@@ -15,14 +14,6 @@
   document.addEventListener('DOMContentLoaded', function () {
     init();
   });
-
-  //  Event listeners for Router
-  //--------------------------------------------------------
-
-  // Listen on hash change:
-  window.addEventListener('hashchange', router);
-  // Listen on page load:
-  window.addEventListener('load', router);
 
   // Functions
   // ========================================================
