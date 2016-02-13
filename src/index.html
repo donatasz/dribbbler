@@ -12,6 +12,14 @@
   <link rel="stylesheet" href="stylesheets/main.css">
 </head>
 <body>
+<ul>
+  <li><a href="#">All Shots</a></li>
+  <li><a href="#/page1">Animated</a></li>
+  <li><a href="#/page2">Debuts</a></li>
+</ul>
+
+<div id="view"></div>
+
 <div class="page-wrapper">
   <div class="container">
     <div class="row start-xs around-lg dribbble-shots"></div>
@@ -20,6 +28,21 @@
 <div id="preloader">
   <span class="preloader-gif"></span>
 </div>
+
 <script src="javascripts/main.js"></script>
+
+<!-- Templates -->
+<script type="text/html" id="home">
+  <h1>Router FTW!</h1>
+</script>
+<script type="text/html" id="template1">
+  <h1>Page 1: {{= greeting }}></h1>
+  <p>{{= moreText }}</p>
+</script>
+<script type="text/html" id="template2">
+  <h1>Page 2: {{= heading }}</h1>
+  <p>Lorem ipsum...</p>
+</script>
+
 </body>
 </html>

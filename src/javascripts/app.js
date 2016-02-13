@@ -12,6 +12,8 @@
 
   dribbbler.utilities = utilities;
   dribbbler.ajaxService = ajaxService;
+  dribbbler.templates = templates;
+  dribbbler.routingService = routingService;
 
   //  Functions
   //--------------------------------------------------------
@@ -130,6 +132,92 @@
     };
 
     return ajax;
+  }
+
+  function templates() {
+    var cache = {};
+
+    return {
+      create: create
+    };
+
+    function create(str, data) {
+      // Figure out if we're getting a template, or if we need to
+      // load the template - and be sure to cache the result.
+      var fn = !/\W/.test(str) ?
+        cache[str] = cache[str] ||
+        create(document.getElementById(str).innerHTML) :
+
+        // Generate a reusable function that will serve as a template
+        // generator (and which will be cached).
+        new Function("obj",
+          "var p=[],print=function(){p.push.apply(p,arguments);};" +
+
+            // Introduce the data as local variables using with(){}
+          "with(obj){p.push('" +
+
+            // Convert the template into pure JavaScript
+          str
+            .replace(/[\r\t\n]/g, " ")
+            .split("{{").join("\t")
+            .replace(/((^|\}\})[^\t]*)'/g, "$1\r")
+            .replace(/\t=(.*?)\}\}/g, "',$1,'")
+            .split("\t").join("');")
+            .split("}}").join("p.push('")
+            .split("\r").join("\\'")
+          + "');}return p.join('');");
+
+      // Provide some basic currying to the user
+      return data ? fn(data) : fn;
+    }
+  }
+
+  function routingService() {
+    // A hash to store our routes:
+    var el = null,
+        routes = {
+          '/': {templateId: 'home', controller: function () {}},
+          '/page1': {templateId: 'template1', controller: function () {
+            this.greeting = 'Hello world!';
+            this.moreText = 'Bacon ipsum...';
+          }},
+          '/page2': {templateId: 'template2', controller: function () {
+            this.heading = 'I\'m page two!';
+          }}
+        };
+
+    // Routes
+    //route('/', 'home', function () {});
+    //route('/page1', 'template1', function () {
+    //  this.greeting = 'Hello world!';
+    //  this.moreText = 'Bacon ipsum...';
+    //});
+    //route('/page2', 'template2', function () {
+    //  this.heading = 'I\'m page two!';
+    //});
+
+    return {
+      router: router
+    };
+
+    function route (path, templateId, controller) {
+      routes[path] = {templateId: templateId, controller: controller};
+    }
+
+    function router () {
+      // Lazy load view element:
+      el = el || document.getElementById('view');
+      // Current route url (getting rid of '#' in hash as well):
+      var url = location.hash.slice(1) || '/';
+      // Get route by url:
+      var route = routes[url];
+      // Do we have both a view and a route?
+      if (el && route.controller) {
+        // Render route template with John Resig's template engine:
+        el.innerHTML = templates().create(route.templateId, new route.controller());
+      }
+    }
+
   }
 
 })(window.dribbbler = window.dribbbler || {});
