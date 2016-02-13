@@ -197,16 +197,28 @@
   //--------------------------------------------------------
 
   function HomeController() {
-    this.greeting = 'Hello Adele!';
+    //ajaxService().get('/shots', {page: 1}, responseHandler);
+    this.category = 'Random Shots';
+    this.shots = [{id:1, title: 'Lorem ipsum', user: {name: 'Dolorem'}, images: {normal: 'https://d13yacurqjgara.cloudfront.net/users/39185/screenshots/2523093/flower.jpg'}}];
+
   }
 
   function Page1Controller() {
-    this.greeting = 'Hello world!';
-    this.moreText = 'Bacon ipsum...';
+    //ajaxService().get('/shots', {page: 1, list: 'debuts'}, responseHandler);
+    this.category = 'Debuts';
   }
 
   function Page2Controller() {
-    this.heading = 'I\'m page two!';
+    this.category = 'Teams';
+  }
+
+  function responseHandler(response) {
+    var dataObject = {
+        shots: utilities().fromJson(response)
+      };
+
+    console.log(dataObject);
+    view.innerHTML = createTemplate('home', dataObject);
   }
 
 })(window.dribbbler = window.dribbbler || {});

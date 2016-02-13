@@ -16,22 +16,24 @@
 </head>
 <body>
 <header class="container">
+  <h1>Dribbler</h1>
   <nav class="row">
     <ul class="col-lg-12">
       <li><a href="#">All Shots</a></li>
-      <li><a href="#/page1">Animated</a></li>
-      <li><a href="#/page2">Debuts</a></li>
+      <li><a href="#/page1">Debuts</a></li>
+      <li><a href="#/page2">Teams</a></li>
     </ul>
   </nav>
 </header>
 
-<div id="view"></div>
+<main id="view" class="page-wrapper"></main>
 
 <div class="page-wrapper">
   <div class="container">
     <div class="row start-xs around-lg dribbble-shots"></div>
   </div>
 </div>
+
 <div id="preloader">
   <span class="preloader-gif"></span>
 </div>
@@ -40,50 +42,66 @@
 
 <!-- Templates -->
 <script type="text/html" id="home">
-  <div class="page-wrapper">
-    <div class="container">
-      <section class="row">
-        <article class="col-lg-12">
-          <header>
-            <h1>Router FTW!</h1>
-            <h2>{{= greeting }}</h2>
-          </header>
-        </article>
-      </section>
-      <section class="row start-xs around-lg dribbble-shots"></section>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1>{{= category}}</h1>
+      </div>
+    </div>
+    <div class="row start-xs around-lg dribbble-shots">
+      {{ for ( var i = 0, len = shots.length; i < len; i++ ) { }}
+
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 shot">
+
+          <div class="image-wrapper">
+            <div class="image-shadow">
+              <img src="{{=shots[i].images.normal}}" title="{{=shots[i].title}}" alt="{{=shots[i].title}}">
+            </div>
+          </div>
+
+          <div class="info-wrapper animate-all" id="{{=shots[i].id}}">
+
+            <div class="info-box">
+              <div class="info-box-content">
+                <h2>{{=shots[i].title}}</h2>
+                <h3><span>{{=shots[i].user.name}}</span></h3>
+                <button class="btn-favorite" title="Favorite">Favorite</button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      {{ } }}
     </div>
   </div>
 </script>
 
 <script type="text/html" id="template1">
-  <div class="page-wrapper">
-    <div class="container">
-      <section class="row">
-        <article class="col-lg-12">
-          <header>
-            <h1>Page 1: {{= greeting }}</h1>
-            <h2>{{= moreText }}</h2>
-          </header>
-        </article>
-      </section>
-      <section class="row start-xs around-lg dribbble-shots"></section>
-    </div>
+  <div class="container">
+    <section class="row">
+      <article class="col-lg-12">
+        <header>
+          <h1>{{= category }}</h1>
+        </header>
+      </article>
+    </section>
+    <section class="row start-xs around-lg dribbble-shots"></section>
   </div>
 </script>
 
 <script type="text/html" id="template2">
-  <div class="page-wrapper">
-    <div class="container">
-      <section class="row">
-        <article class="col-lg-12">
-          <header>
-            <h1>Page 2: {{= heading }}</h1>
-            <h2>Lorem ipsum...</h2>
-          </header>
-        </article>
-      </section>
-      <section class="row start-xs around-lg dribbble-shots"></section>
-    </div>
+  <div class="container">
+    <section class="row">
+      <article class="col-lg-12">
+        <header>
+          <h1>{{= category }}</h1>
+        </header>
+      </article>
+    </section>
+    <section class="row start-xs around-lg dribbble-shots"></section>
   </div>
 </script>
 
