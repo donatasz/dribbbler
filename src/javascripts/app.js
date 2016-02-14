@@ -13,6 +13,7 @@
   dribbbler.utilities = utilities;
   dribbbler.ajaxService = ajaxService;
   dribbbler.ajax = ajax;
+  dribbbler.createElements = createElements;
 
   //  Functions
   //--------------------------------------------------------
@@ -24,7 +25,8 @@
       fromJson: fromJson,
       isDefined: isDefined,
       isUndefined: isUndefined,
-      isString: isString
+      isString: isString,
+      isLiked: isLiked
     };
 
     function preloader(state) {
@@ -32,11 +34,11 @@
 
       var states = {
         activate: function () {
-          console.log('on');
+          //console.log('on');
           preloader.classList.add('preloader');
         },
         deactivate: function () {
-          console.log('off');
+          //console.log('off');
           preloader.classList.remove('preloader');
         }
       };
@@ -64,6 +66,14 @@
 
     function isString(value) {
       return typeof value === 'string';
+    }
+
+    function isLiked(id) {
+      var favoriteShots = fromJson(localStorage.getItem('favoriteShots'));
+      if (favoriteShots) {
+        return favoriteShots.indexOf(id) > -1;
+      }
+      return false;
     }
   }
 
@@ -181,6 +191,40 @@
 
   function errorHandler(response) {
     console.log(response);
+  }
+
+  //  Create elements for the DOM
+  //--------------------------------------------------------
+
+  function createElements(parent, data) {
+    var shot,
+      i,
+      len,
+      liked;
+
+    for (i = 0, len = data.length; i < len; i++) {
+      liked = utilities().isLiked(data[i].id) ? ' liked' : '';
+      shot = '<figure class="col-lg-4 col-md-6 col-sm-6 col-xs-12 shot">' +
+        '<div class="image-wrapper">' +
+          '<div class="image-shadow">' +
+            '<img src="' + data[i].images.normal + '"' + ' title="' + data[i].title + '"' + ' alt="' + data[i].title + '"' +
+          '</div>' +
+        '</div>' +
+        '<figcaption ' + 'id="' + data[i].id + '"' + 'class="info-wrapper animate-all'+ liked +'"' + '>' +
+          '<div class="info-box">' +
+            '<div class="info-box-content">' +
+              '<h2>' + data[i].title + '</h2>' +
+              '<h3>' +
+                '<span>' + data[i].user.name + '</span>' +
+              '</h3>' +
+              '<button ' + 'id="' + data[i].id + '"' + 'class="btn-favorite" title="Favorite">Favorite</button>' +
+            '</div>' +
+          '</div>' +
+        '</figcaption>'+
+      '</figure>';
+
+      parent.innerHTML = parent.innerHTML + shot;
+    }
   }
 
 })(window.dribbbler = window.dribbbler || {});
