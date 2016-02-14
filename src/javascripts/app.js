@@ -5,24 +5,7 @@
   //--------------------------------------------------------
 
   var api = 'https://api.dribbble.com/v1',
-    token = '7fd3070a9e61d6162ef3e773ff73b54c9750cbed7fcfd5a9dd6b4267d6a3c00f',
-    view = null,
-    // A hash to store templates
-    templateCache = {},
-    // A hash to store routes
-    routes = {
-      '/': {templateId: 'home', controller: HomeController},
-      '/page1': {templateId: 'template1', controller: Page1Controller},
-      '/page2': {templateId: 'template2', controller: Page2Controller}
-    };
-
-  //  Event listeners for Router
-  //--------------------------------------------------------
-
-  // Listen on hash change:
-  window.addEventListener('hashchange', router);
-  // Listen on page load:
-  window.addEventListener('load', router);
+      token = '7fd3070a9e61d6162ef3e773ff73b54c9750cbed7fcfd5a9dd6b4267d6a3c00f';
 
   //  Application public methods
   //--------------------------------------------------------
@@ -150,6 +133,9 @@
     return ajax;
   }
 
+  //  XMLHttpRequest wrapped into a promise
+  //--------------------------------------------------------
+
   function ajax(options) {
     var deferred = Q.defer(),
       req = new XMLHttpRequest();
@@ -187,86 +173,14 @@
     return deferred.promise;
   }
 
-  function createTemplate(str, data) {
-    // Figure out if we're getting a template, or if we need to
-    // load the template - and be sure to cache the result.
-    var fn = !/\W/.test(str) ?
-      templateCache[str] = templateCache[str] ||
-        createTemplate(document.getElementById(str).innerHTML) :
+  //ajax({url: api + '/shots', params: {page: 1}}).then(successHandler, errorHandler);
 
-      // Generate a reusable function that will serve as a template
-      // generator (and which will be cached).
-      new Function("obj",
-        "var p=[],print=function(){p.push.apply(p,arguments);};" +
-
-          // Introduce the data as local variables using with(){}
-        "with(obj){p.push('" +
-
-          // Convert the template into pure JavaScript
-        str
-          .replace(/[\r\t\n]/g, " ")
-          .split("{{").join("\t")
-          .replace(/((^|\}\})[^\t]*)'/g, "$1\r")
-          .replace(/\t=(.*?)\}\}/g, "',$1,'")
-          .split("\t").join("');")
-          .split("}}").join("p.push('")
-          .split("\r").join("\\'")
-        + "');}return p.join('');");
-
-    // Provide some basic currying to the user
-    return data ? fn(data) : fn;
+  function successHandler(response) {
+    console.log('success ', JSON.parse(response));
   }
 
-  function router() {
-    // Lazy load view element:
-    view = view || document.getElementById('view');
-    // Current route url (getting rid of '#' in hash as well):
-    var url = location.hash.slice(1) || '/';
-    // Get route by url:
-    var route = routes[url];
-    // Do we have both a view and a route?
-    if (view && route.controller) {
-      // Render route template with John Resig's template engine:
-      view.innerHTML = createTemplate(route.templateId, new route.controller());
-    }
-  }
-
-  //  Application controllers
-  //--------------------------------------------------------
-
-  function HomeController() {
-    var vm = this;
-    vm.category = 'Random Shots';
-    vm.shots = [{id:1, title: 'Lorem ipsum', user: {name: 'Dolorem'}, images: {normal: 'https://d13yacurqjgara.cloudfront.net/users/39185/screenshots/2523093/flower.jpg'}}];
-
-    //ajax({url: api + '/shots', params: {page: 1}}).then(successHandler, errorHandler);
-
-    function successHandler(response) {
-      console.log(vm);
-      vm.shots = JSON.parse(response);
-      console.log('success ', JSON.parse(response));
-    }
-
-    function errorHandler(response) {
-      console.log(response);
-    }
-  }
-
-  function Page1Controller() {
-    this.category = 'Debuts';
-  }
-
-  function Page2Controller() {
-    this.category = 'Teams';
-  }
-
-  function responseHandler(response) {
-    var dataObject = {
-        shots: utilities().fromJson(response)
-      };
-
-    console.log(dataObject);
-    view.innerHTML = createTemplate('home', dataObject);
+  function errorHandler(response) {
+    console.log(response);
   }
 
 })(window.dribbbler = window.dribbbler || {});
