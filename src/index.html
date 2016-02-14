@@ -43,40 +43,13 @@
 
 <!-- Templates -->
 <script type="text/html" id="home">
-
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <h1>{{= category}}</h1>
+        <h2>{{= category}}</h2>
       </div>
     </div>
-    <div class="row start-xs around-lg dribbble-shots">
-      {{ for ( var i = 0, len = shots.length; i < len; i++ ) { }}
 
-        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 shot">
-
-          <div class="image-wrapper">
-            <div class="image-shadow">
-              <img src="{{=shots[i].images.normal}}" title="{{=shots[i].title}}" alt="{{=shots[i].title}}">
-            </div>
-          </div>
-
-          <div class="info-wrapper animate-all" id="{{=shots[i].id}}">
-
-            <div class="info-box">
-              <div class="info-box-content">
-                <h2>{{=shots[i].title}}</h2>
-                <h3><span>{{=shots[i].user.name}}</span></h3>
-                <button class="btn-favorite" title="Favorite">Favorite</button>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
-      {{ } }}
-    </div>
   </div>
 </script>
 
@@ -85,11 +58,10 @@
     <section class="row">
       <article class="col-lg-12">
         <header>
-          <h1>{{= category }}</h1>
+          <h2>{{= category }}</h2>
         </header>
       </article>
     </section>
-    <section class="row start-xs around-lg dribbble-shots"></section>
   </div>
 </script>
 
@@ -98,13 +70,38 @@
     <section class="row">
       <article class="col-lg-12">
         <header>
-          <h1>{{= category }}</h1>
+          <h2>{{= category }}</h2>
         </header>
       </article>
     </section>
-    <section class="row start-xs around-lg dribbble-shots"></section>
   </div>
 </script>
 
 </body>
 </html>
+
+<!--<div class="row start-xs around-lg dribbble-shots">-->
+  <!--{{ for ( var i = 0, len = shots.length; i < len; i++ ) { }}-->
+  <!---->
+  <!--<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 shot">-->
+    <!---->
+    <!--<div class="image-wrapper">-->
+      <!--<div class="image-shadow">-->
+        <!--<img src="{{=shots[i].images.normal}}" title="{{=shots[i].title}}" alt="{{=shots[i].title}}">-->
+      <!--</div>-->
+    <!--</div>-->
+    <!---->
+    <!--<div class="info-wrapper animate-all" id="{{=shots[i].id}}">-->
+      <!--<div class="info-box">-->
+        <!--<div class="info-box-content">-->
+          <!--<h2>{{=shots[i].title}}</h2>-->
+          <!--<h3><span>{{=shots[i].user.name}}</span></h3>-->
+          <!--<button class="btn-favorite" title="Favorite">Favorite</button>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!---->
+  <!--</div>-->
+  <!---->
+  <!--{{ } }}-->
+<!--</div>-->
