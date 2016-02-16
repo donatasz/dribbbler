@@ -13,7 +13,6 @@
 
   dribbbler.utilities = utilities;
   dribbbler.ajaxService = ajaxService;
-  dribbbler.ajax = ajax;
   dribbbler.createElements = createElements;
 
   //  Functions
@@ -141,59 +140,6 @@
 
     return ajax;
   }
-
-  //  XMLHttpRequest wrapped into a promise
-  //--------------------------------------------------------
-
-  function ajax(options) {
-    var deferred = Q.defer(),
-      req = new XMLHttpRequest();
-
-    options.params.access_token = token;
-    var query = [];
-    for (var key in options.params) {
-      query.push(encodeURIComponent(key) + '=' + encodeURIComponent(options.params[key]));
-    }
-
-    console.log(options);
-
-    req.open(options.method || 'GET', options.url + (query.length ? '?' + query.join('&') : ''), true);
-
-    // Set request headers if provided.
-    Object.keys(options.headers || {}).forEach(function (key) {
-      req.setRequestHeader(key, options.headers[key]);
-    });
-
-    req.onreadystatechange = function(e) {
-      if(req.readyState !== 4) {
-        return;
-      }
-
-      if([200,304].indexOf(req.status) === -1) {
-        deferred.reject(new Error('Server responded with a status of ' + req.status));
-      } else {
-        //console.log(e.target);
-        deferred.resolve(e.target.response);
-      }
-    };
-
-    req.send(null);
-
-    return deferred.promise;
-  }
-
-  //ajax({url: api + '/shots', params: {page: 1}}).then(successHandler, errorHandler);
-
-  function successHandler(response) {
-    console.log('success ', JSON.parse(response));
-  }
-
-  function errorHandler(response) {
-    console.log(response);
-  }
-
-  //  Create elements for the DOM
-  //--------------------------------------------------------
 
   function createElements(parent, data) {
     var shot,
