@@ -1,0 +1,72 @@
+.d-shot {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: $white;
+
+  &:hover {
+    figcaption {
+      opacity: 1;
+    }
+
+    img {
+      -webkit-filter: blur(3px);
+      filter: blur(3px);
+    }
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 7px;
+    transition: filter .3s;
+  }
+
+  figcaption {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, .2);
+    opacity: 0;
+    border-radius: 7px;
+    transition: opacity .3s;
+  }
+
+}
+
+.shot-title,
+.shot-author {
+  text-transform: capitalize;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, .6);
+  padding: .75rem 0;
+  margin: 0;
+}
+
+.shot-title {
+  font-size: 1.25rem;
+}
+
+.shot-author {
+  font-size: 1rem;
+  font-style: italic;
+  span {
+    position: relative;
+    padding-top: .75rem;
+    &:before {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 1px;
+      border-top: 2px solid $white;
+      content: ""
+    }
+  }
+}
