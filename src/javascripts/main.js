@@ -1,13 +1,13 @@
-(function (dribbbler, undefined) {
+(function (dribbbler) {
   'use strict';
 
   // Variables
   // ========================================================
   var dribbbleShots = document.querySelector('.dribbble-shots'),
-    pageIndex = 1,
-    ajaxService = dribbbler.ajaxService(),
-    utilities = dribbbler.utilities(),
-    createElements = dribbbler.createElements;
+      pageIndex = 1,
+      ajaxService = dribbbler.ajaxService(),
+      utilities = dribbbler.utilities(),
+      createElements = dribbbler.createElements;
 
   // Listen for DOMContentLoaded and initialize
   // ========================================================

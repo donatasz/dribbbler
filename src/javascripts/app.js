@@ -1,4 +1,4 @@
-(function (dribbbler, undefined) {
+(function (dribbbler) {
   'use strict';
 
   //  Private variables
