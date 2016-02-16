@@ -28,14 +28,14 @@
   }
 
   function getData(index) {
-    utilities.preloader('activate');
+    utilities.loading('on');
     ajaxService.get('/shots', {page: index}, responseHandler);
   }
 
   function responseHandler(response) {
     var data = utilities.fromJson(response);
     createElements(dribbbleShots, data);
-    utilities.preloader('deactivate');
+    utilities.loading('off');
   }
 
   function checkForNewDiv() {

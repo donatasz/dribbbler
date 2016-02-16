@@ -5,7 +5,8 @@
   //--------------------------------------------------------
 
   var api = 'https://api.dribbble.com/v1',
-      token = '7fd3070a9e61d6162ef3e773ff73b54c9750cbed7fcfd5a9dd6b4267d6a3c00f';
+      token = '7fd3070a9e61d6162ef3e773ff73b54c9750cbed7fcfd5a9dd6b4267d6a3c00f',
+      preloader = document.getElementById('preloader');
 
   //  Application public methods
   //--------------------------------------------------------
@@ -20,7 +21,7 @@
 
   function utilities() {
     return {
-      preloader: preloader,
+      loading: loading,
       toJson: toJson,
       fromJson: fromJson,
       isDefined: isDefined,
@@ -29,17 +30,15 @@
       isLiked: isLiked
     };
 
-    function preloader(state) {
-      var preloader = document.getElementById('preloader');
-
+    function loading(state) {
       var states = {
-        activate: function () {
+        'on': function () {
           //console.log('on');
-          preloader.classList.add('preloader');
+          preloader.classList.add('loading');
         },
-        deactivate: function () {
+        'off': function () {
           //console.log('off');
-          preloader.classList.remove('preloader');
+          preloader.classList.remove('loading');
         }
       };
       states[state]();
