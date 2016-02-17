@@ -154,11 +154,11 @@
         liked: utilities().isLiked(data[i].id) ? ' liked' : ''
       };
 
-      parent.innerHTML = parent.innerHTML + templateEngine(template, shot);
+      parent.innerHTML = parent.innerHTML + TemplateEngine(template, shot);
     }
   }
 
-  function templateEngine(html, options) {
+  function TemplateEngine(html, options) {
     var re = /<%([^%>]+)?%>/g, reExp = /(^( )?(if|for|else|switch|case|break|{|}))(.*)?/g, code = 'var r=[];\n', cursor = 0, match;
     var add = function (line, js) {
       js ? (code += line.match(reExp) ? line + '\n' : 'r.push(' + line + ');\n') :
