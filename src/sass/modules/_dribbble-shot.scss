@@ -1,4 +1,4 @@
-.d-shot {
+.shot {
   position: relative;
   margin: 0;
   padding: 0;
@@ -11,7 +11,6 @@
     }
 
     img {
-      -webkit-filter: blur(3px);
       filter: blur(3px);
     }
   }
@@ -69,4 +68,35 @@
       content: ""
     }
   }
+}
+
+.liked {
+  position: relative;
+  &:before {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    z-index: 2;
+    background-image: url('../images/heart.png');
+    background-size: 32px 32px;
+    width: 32px;
+    height: 32px;
+    content: '';
+    color: $white;
+    @media screen and (min-width: 480px) {
+      background-size: 64px 64px;
+      width: 64px;
+      height: 64px;
+    }
+  }
+}
+
+.btn-favorite {
+  color: $white;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 7px 30px;
+  border-radius: 30px;
+  border: 2px solid $white;
+  background: transparent;
 }
