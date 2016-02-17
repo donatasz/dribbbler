@@ -6,38 +6,37 @@
   color: $white;
 
   &:hover {
-    figcaption {
-      opacity: 1;
-    }
-
-    img {
+    .shot-image {
       filter: blur(3px);
     }
-  }
 
-  img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 7px;
-    transition: filter .3s;
+    .shot-info {
+      opacity: 1;
+    }
   }
+}
 
-  figcaption {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, .2);
-    opacity: 0;
-    border-radius: 7px;
-    transition: opacity .3s;
-  }
+.shot-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 7px;
+  transition: filter .3s;
+}
 
+.shot-info {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, .2);
+  opacity: 0;
+  border-radius: 7px;
+  transition: opacity .3s;
 }
 
 .shot-title,
@@ -71,7 +70,6 @@
 }
 
 .liked {
-  position: relative;
   &:before {
     position: absolute;
     top: 15px;
@@ -89,14 +87,4 @@
       height: 64px;
     }
   }
-}
-
-.btn-favorite {
-  color: $white;
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 7px 30px;
-  border-radius: 30px;
-  border: 2px solid $white;
-  background: transparent;
 }
