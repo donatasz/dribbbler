@@ -6,4 +6,10 @@
   border-radius: 30px;
   border: 2px solid $white;
   background: transparent;
+  transition: all .3s;
+
+  &:hover {
+    color: darken($white, 10%);
+    border-color: darken($white, 10%);
+  }
 }
