@@ -143,11 +143,9 @@
 
   function createElements(parent, data) {
     var shot,
-      i,
-      len,
       liked;
 
-    for (i = 0, len = data.length; i < len; i++) {
+    for (var i = 0, len = data.length; i < len; i++) {
       liked = utilities().isLiked(data[i].id) ? ' liked' : '';
       shot = '<figure class="col-lg-4 col-md-6 col-sm-6 col-xs-12 shot">' +
         '<div class="image-wrapper">' +
