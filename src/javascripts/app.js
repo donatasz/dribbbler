@@ -152,7 +152,7 @@
       shot = '<figure class="col-lg-4 col-md-6 col-sm-6 col-xs-12 shot">' +
         '<div class="image-wrapper">' +
           '<div class="image-shadow">' +
-            '<img src="' + data[i].images.normal + '"' + ' title="' + data[i].title + '"' + ' alt="' + data[i].title + '"' +
+            '<img src="' + data[i].images.normal + '"' + ' title="' + data[i].title + '"' + ' alt="' + data[i].title + '">' +
           '</div>' +
         '</div>' +
         '<figcaption ' + 'id="' + data[i].id + '"' + 'class="info-wrapper animate-all'+ liked +'"' + '>' +
