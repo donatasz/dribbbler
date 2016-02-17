@@ -155,7 +155,7 @@
             '<img src="' + data[i].images.normal + '"' + ' title="' + data[i].title + '"' + ' alt="' + data[i].title + '">' +
           '</div>' +
         '</div>' +
-        '<figcaption ' + 'id="' + data[i].id + '"' + 'class="info-wrapper animate-all'+ liked +'"' + '>' +
+        '<figcaption ' + 'id="' + data[i].id + '"' + 'class="info-wrapper animate-all'+ liked +'">' +
           '<div class="info-box">' +
             '<div class="info-box-content">' +
               '<h2>' + data[i].title + '</h2>' +
