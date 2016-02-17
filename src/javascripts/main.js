@@ -76,12 +76,12 @@
   }
 
   function addLike(id) {
-    var clickedShot = document.getElementById(id);
+    var clickedShot = document.querySelector("[data-id='" + id + "']");
     clickedShot.classList.add('liked');
   }
 
   function removeLike(id) {
-    var clickedShot = document.getElementById(id);
+    var clickedShot = document.querySelector("[data-id='" + id + "']");
     clickedShot.classList.remove('liked');
   }
 

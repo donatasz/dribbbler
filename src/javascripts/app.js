@@ -6,7 +6,8 @@
 
   var api = 'https://api.dribbble.com/v1',
       token = '7fd3070a9e61d6162ef3e773ff73b54c9750cbed7fcfd5a9dd6b4267d6a3c00f',
-      preloader = document.getElementById('preloader');
+      preloader = document.getElementById('preloader'),
+      template = document.getElementById('template').innerHTML;
 
   //  Application public methods
   //--------------------------------------------------------
@@ -142,32 +143,35 @@
   }
 
   function createElements(parent, data) {
-    var shot,
-      liked;
+    var shot;
 
     for (var i = 0, len = data.length; i < len; i++) {
-      liked = utilities().isLiked(data[i].id) ? ' liked' : '';
-      shot = '<figure class="col-lg-4 col-md-6 col-sm-6 col-xs-12 shot">' +
-        '<div class="image-wrapper">' +
-          '<div class="image-shadow">' +
-            '<img src="' + data[i].images.normal + '"' + ' title="' + data[i].title + '"' + ' alt="' + data[i].title + '">' +
-          '</div>' +
-        '</div>' +
-        '<figcaption ' + 'id="' + data[i].id + '"' + 'class="info-wrapper animate-all'+ liked +'">' +
-          '<div class="info-box">' +
-            '<div class="info-box-content">' +
-              '<h2>' + data[i].title + '</h2>' +
-              '<h3>' +
-                '<span>' + data[i].user.name + '</span>' +
-              '</h3>' +
-              '<button ' + 'id="' + data[i].id + '"' + 'class="btn-favorite" title="Favorite">Favorite</button>' +
-            '</div>' +
-          '</div>' +
-        '</figcaption>'+
-      '</figure>';
+      shot = {
+        id: data[i].id,
+        image: data[i].images.normal,
+        title: data[i].title,
+        author: data[i].user.name,
+        liked: utilities().isLiked(data[i].id) ? ' liked' : ''
+      };
 
-      parent.innerHTML = parent.innerHTML + shot;
+      parent.innerHTML = parent.innerHTML + templateEngine(template, shot);
     }
+  }
+
+  function templateEngine(html, options) {
+    var re = /<%([^%>]+)?%>/g, reExp = /(^( )?(if|for|else|switch|case|break|{|}))(.*)?/g, code = 'var r=[];\n', cursor = 0, match;
+    var add = function (line, js) {
+      js ? (code += line.match(reExp) ? line + '\n' : 'r.push(' + line + ');\n') :
+        (code += line !== '' ? 'r.push("' + line.replace(/"/g, '\\"') + '");\n' : '');
+      return add;
+    };
+    while (match = re.exec(html)) {
+      add(html.slice(cursor, match.index))(match[1], true);
+      cursor = match.index + match[0].length;
+    }
+    add(html.substr(cursor, html.length - cursor));
+    code += 'return r.join("");';
+    return new Function(code.replace(/[\r\t\n]/g, '')).apply(options);
   }
 
 })(window.dribbbler = window.dribbbler || {});

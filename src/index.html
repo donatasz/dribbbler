@@ -18,20 +18,6 @@
 
 <main class="page-wrapper">
   <div class="container">
-
-    <section class="row">
-      <figure class="col-lg-4 d-shot">
-        <img src="https://d13yacurqjgara.cloudfront.net/users/1081265/screenshots/2529191/11-bafta-covers_20163_1x.jpg" title="The Revenant" alt="The Revenant">
-        <figcaption>
-            <div class="shot-info">
-              <h2 class="shot-title">2016 BAFTA Awards Brochure - The Revenant</h2>
-              <h3 class="shot-author"><span>Human After All</span></h3>
-              <button class="btn-favorite" title="Favorite">Favorite</button>
-            </div>
-          </figcaption>
-        </figure>
-    </section>
-
     <section class="row start-xs around-lg dribbble-shots"></section>
   </div>
 </main>
@@ -39,6 +25,19 @@
 <div id="preloader">
   <span class="loading-gif"></span>
 </div>
+
+<script id="template" type="text/html">
+  <figure class="col-lg-4 d-shot">
+    <img src="<% this.image %>" title="<% this.title %>" alt="<% this.title %>">
+    <figcaption class="<% this.liked %>" data-id="<% this.id %>">
+      <div class="shot-info">
+        <h2 class="shot-title"><% this.title %></h2>
+        <h3 class="shot-author"><span><% this.author %></span></h3>
+        <button class="btn-favorite" id="<% this.id %>" title="Favorite">Favorite</button>
+      </div>
+    </figcaption>
+  </figure>
+</script>
 
 <script src="javascripts/main.js"></script>
 </body>
