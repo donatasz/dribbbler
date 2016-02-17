@@ -50,7 +50,7 @@
   }
 
   function markFavorite(event) {
-    var target = event.srcElement,
+    var target = event.target || event.srcElement,
         targetId = Number(target.id),
         favoriteShots = utilities.fromJson(localStorage.getItem('favoriteShots')),
         shotIndex;
