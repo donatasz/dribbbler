@@ -1,5 +1,10 @@
 .shot-wrapper {
-  margin: 0 0 20px;
+  width: 100%;
+  margin: 0 0 10px;
+
+  @media only screen and (min-width: 480px) {
+    margin: 0 0 20px;
+  }
 }
 
 .shot {
@@ -88,7 +93,7 @@
     height: 32px;
     content: '';
     color: $white;
-    @media screen and (min-width: 480px) {
+    @media only screen and (min-width: 480px) {
       background-size: 64px 64px;
       width: 64px;
       height: 64px;

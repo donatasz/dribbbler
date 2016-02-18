@@ -18,12 +18,12 @@
 
 <main class="page-wrapper">
   <div class="container">
-    <header class="row center-xs">
-      <div class="col-lg-12">
-        <h1>Dribbbler</h1>
+    <header class="row">
+      <div class="col-xs-12">
+        <h1 class="text-center">Dribbbler</h1>
       </div>
     </header>
-    <section class="row start-xs around-lg dribbble-shots"></section>
+    <section class="row dribbble-shots"></section>
   </div>
 </main>
 
@@ -32,7 +32,7 @@
 </div>
 
 <script id="template" type="text/html">
-  <article class="col-lg-4 col-md-6 col-sm-6 col-xs-12 shot-wrapper">
+  <article class="col-lg-4 col-md-4 col-sm-6 col-xs-12 shot-wrapper">
     <figure class="shot">
       <img class="shot-image" src="<% this.image %>" title="<% this.title %>" alt="<% this.title %>">
       <figcaption class="shot-info <% this.liked %>" data-id="<% this.id %>">

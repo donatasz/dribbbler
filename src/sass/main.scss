@@ -2,6 +2,7 @@
 @import 'utilities/variables';
 @import 'utilities/functions';
 @import 'utilities/mixins';
+@import 'utilities/helpers';
 
 // Base
 @import 'base/normalize';
@@ -9,7 +10,7 @@
 @import 'base/typography';
 
 // Layout
-@import 'layout/grid';
+@import 'layout/flex-grid';
 @import 'layout/layout';
 
 // Modules
