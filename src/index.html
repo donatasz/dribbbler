@@ -27,16 +27,18 @@
 </div>
 
 <script id="template" type="text/html">
-  <figure class="col-lg-4 col-md-6 col-sm-6 col-xs-12 shot">
-    <img class="shot-image" src="<% this.image %>" title="<% this.title %>" alt="<% this.title %>">
-    <figcaption class="shot-info <% this.liked %>" data-id="<% this.id %>">
-      <div>
-        <h2 class="shot-title"><% this.title %></h2>
-        <h3 class="shot-author"><span><% this.author %></span></h3>
-        <button class="btn-favorite" id="<% this.id %>" title="Favorite">Favorite</button>
-      </div>
-    </figcaption>
-  </figure>
+  <article class="col-lg-4 col-md-6 col-sm-6 col-xs-12 shot-wrapper">
+    <figure class="shot">
+      <img class="shot-image" src="<% this.image %>" title="<% this.title %>" alt="<% this.title %>">
+      <figcaption class="shot-info <% this.liked %>" data-id="<% this.id %>">
+        <div>
+          <h2 class="shot-title"><% this.title %></h2>
+          <h3 class="shot-author"><span><% this.author %></span></h3>
+          <button class="btn-favorite" id="<% this.id %>" title="Favorite">Favorite</button>
+        </div>
+      </figcaption>
+    </figure>
+  </article>
 </script>
 
 <script src="javascripts/main.js"></script>

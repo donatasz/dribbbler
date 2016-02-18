@@ -1,9 +1,16 @@
+.shot-wrapper {
+  margin: 0 0 20px;
+}
+
 .shot {
   position: relative;
   margin: 0;
   padding: 0;
   text-align: center;
   color: $white;
+  overflow: hidden;
+  border-radius: 7px;
+  -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
 
   &:hover {
     .shot-image {

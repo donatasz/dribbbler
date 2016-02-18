@@ -39,7 +39,7 @@
   }
 
   function checkForNewDiv() {
-    var lastDiv = document.querySelector('.dribbble-shots > figure:last-child'),
+    var lastDiv = document.querySelector('.dribbble-shots > article:last-child'),
       lastDivOffset = lastDiv.offsetTop + lastDiv.clientHeight,
       pageOffset = window.pageYOffset + window.innerHeight;
 
