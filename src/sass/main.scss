@@ -1,22 +1,22 @@
-// Utilities
-@import 'utilities/variables';
-@import 'utilities/functions';
-@import 'utilities/mixins';
-@import 'utilities/helpers';
-
 // Base
+@import 'base/variables';
 @import 'base/normalize';
 @import 'base/base';
 @import 'base/typography';
+
+// Utilities
+@import 'utilities/functions';
+@import 'utilities/mixins';
+@import 'utilities/helpers';
 
 // Layout
 @import 'layout/flex-grid';
 @import 'layout/layout';
 
-// Modules
-@import 'modules/dribbble-shot';
-@import 'modules/buttons';
-@import 'modules/preloader';
+// Components
+@import 'components/dribbble-shot';
+@import 'components/buttons';
+@import 'components/preloader';
 
-// State
-@import 'state/animations';
+// Pages
+@import 'pages/index';

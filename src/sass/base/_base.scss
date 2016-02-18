@@ -3,6 +3,8 @@ html {
     background-color: $light-grey;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
     box-sizing: inherit;
 }
