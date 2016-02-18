@@ -141,7 +141,8 @@
   }
 
   function createElements(parent, data) {
-    var shot;
+    var shot,
+        isLiked = utilities().isLiked;
 
     for (var i = 0, len = data.length; i < len; i++) {
       shot = {
@@ -149,7 +150,7 @@
         image: data[i].images.normal,
         title: data[i].title,
         author: data[i].user.name,
-        liked: utilities().isLiked(data[i].id) ? ' liked' : ''
+        liked: isLiked(data[i].id) ? ' liked' : ''
       };
 
       parent.innerHTML = parent.innerHTML + TemplateEngine(template, shot);
