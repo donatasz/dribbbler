@@ -33,11 +33,9 @@
     function loading(state) {
       var states = {
         'on': function () {
-          //console.log('on');
           preloader.classList.add('loading');
         },
         'off': function () {
-          //console.log('off');
           preloader.classList.remove('loading');
         }
       };
@@ -97,8 +95,8 @@
         try {
           xhr = new ActiveXObject(versions[i]);
           break;
-        } catch (e) {
-          console.log('Error: ', e);
+        } catch (err) {
+          throw new Error(err.message);
         }
       }
       return xhr;
